@@ -47,6 +47,7 @@ logical constness
 class CTextBlock{
 public:
     CTextBlock(char *s):pText(s){}
+    CTextBlock()=default;
     char &operator[](std::size_t pos)const          //bitwise声明
     {return pText[pos];}                            //但其实不适当
 private:
@@ -58,6 +59,7 @@ private:
     char *pc=&cctb[0];
 
     *pc='J';                                        //你创建一个常量对象并设以某值，而且只对它调用const成员函数。但你终究改变了值
+                                                    //注:此种错误目前已经被编译器解决,无法通过这种方式再改变
 
 */
 
