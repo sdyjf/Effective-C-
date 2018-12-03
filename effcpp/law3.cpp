@@ -46,6 +46,7 @@ logical constness
 */
 class CTextBlock{
 public:
+    CTextBlock(char *s):pText(s){}
     char &operator[](std::size_t pos)const          //bitwise声明
     {return pText[pos];}                            //但其实不适当
 private:
@@ -53,8 +54,29 @@ private:
 };
 
 /*
-    const CTextBlock cctb("Hello");
+    const CTextBlock cctb("hello");
     char *pc=&cctb[0];
 
     *pc='J';                                        //你创建一个常量对象并设以某值，而且只对它调用const成员函数。但你终究改变了值
+
 */
+
+/*
+令const成员函数实现non-const孪生兄弟
+*/
+
+class Textbook{
+public:
+    const char& operator[](std::size_t pos)const{
+        return text[pos];
+    }
+    char & operator[](std::size_t pos){
+        return
+            const_cast<char&>(
+                static_cast<const Textbook&>(*this)
+                    [pos]
+            );
+    }
+private:
+    std::string text;
+};
