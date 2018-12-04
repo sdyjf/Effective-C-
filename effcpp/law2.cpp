@@ -1,6 +1,8 @@
 /*
 条款02:尽量以const,enum,inline替换#define
+
 1.对于单纯常量,最好以const对象或enums替换#defines
+
 2.对于形似函数的宏(macros),最好用inline函数替换#defines
 */
 
